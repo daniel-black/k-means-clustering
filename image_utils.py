@@ -1,10 +1,11 @@
+# this file was mostly written by my professor, Daniel Kluver, as starting point for the basics of this project
+# the two sample ppm files are also photos taken by my professor
+# the other two modules, k_means and run_k_means, were written by yours truly
+
 import random
 
-# A variable defining "black" as a computer color.
-# This is used in load when making an empty list-of-lists for loading data into.
-# You probably don't need this, but what do I know?
-BLACK = (0, 0, 0)
 
+BLACK = (0, 0, 0)
 
 def read_ppm(filename):
     """
@@ -51,32 +52,16 @@ def random_color():
        Each color component will be between 0 and 255"""
     return (random.randrange(256), random.randrange(256), random.randrange(256))
 
-
 def save_ppm(filename, image):
-    """
-    Writes an image in ppm format (specifically "plain" ppm format P3)
-    :param filename: The filename to save to
-    :param image: The image data, should be a width x height list-of-lists with each element
-                being a 3-tuple of red,green,blue values each of which should be between 0 and 255.
-    :return: Nothing.
-    """
-    # Provided, open the file and write the first few lines, as these are required
-    # Note, the syntax for writing to a file is a little different than print.
     out_file = open(filename, "w")
     print("P3", file=out_file)
 
     width, height = get_width_height(image)
     print(width, height, file=out_file)
     print(255, file=out_file)
-
-    # From here, you need to write the image data.
-    # To write one pixel you simply need to output the red, green, and blue components
-    # in order with whitespace separating them. I would also recommend putting a newline after each pixed.
-    # you need to output the image row-by-row, so all of the first row, then all of the second etc.
     
     for rowNum in range(height):
         for colNum in range(width):
             print(image[colNum][rowNum][0], image[colNum][rowNum][1], image[colNum][rowNum][2], file=out_file)
 
-    # Provided - gotta close the file, skipping this is bad ok?
     out_file.close()
